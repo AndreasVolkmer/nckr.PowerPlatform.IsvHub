@@ -10,10 +10,34 @@ pool:
   vmImage: windows-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '**/*.sln'
+    feedsToUse: 'select'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: VSBuild@1
+  inputs:
+    solution: '**\*.sln'
+
+- task: BatchScript@1
+  inputs:
+    filename: 'Solution/spkl/pack.bat'
+    workingFolder: 'Solution/spkl'
+
+- task: PublishSymbols@2
+  inputs:
+    SymbolsFolder: 
+    SearchPattern: '**/bin/**/*.pdb'
+    SymbolServerType: 'TeamServices'
+
+- task: CopyFiles@2
+  inputs:
+    Contents: '**\*.zip'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
