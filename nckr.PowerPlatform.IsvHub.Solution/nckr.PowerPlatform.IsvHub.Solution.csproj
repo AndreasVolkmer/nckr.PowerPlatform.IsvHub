@@ -283,6 +283,7 @@
     <None Include="packages.config" />
     <None Include="spkl.json" />
     <None Include="spkl\pack+import.bat" />
+    <None Include="spkl\pack.bat" />
     <None Include="spkl\unpack.bat" />
   </ItemGroup>
   <ItemGroup>
