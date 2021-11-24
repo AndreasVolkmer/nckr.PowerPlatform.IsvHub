@@ -8,13 +8,12 @@ trigger:
 
 pool:
   vmImage: windows-latest
-  
 
 steps:
 - task: BatchScript@1
   inputs:
-    filename: '%PATHTOFILE%\spkl\pack.bat'
-    workingFolder: '%PATHTOFILE%\spkl'
+    filename: "nckr.PowerPlatform.IsvHub.Solution\\spkl\\pack.bat"
+    workingFolder: 'nckr.PowerPlatform.IsvHub.Solution\spkl'
 
 - task: CopyFiles@2
   inputs:
