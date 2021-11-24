@@ -12,7 +12,7 @@ pool:
 steps:
 - task: BatchScript@1
   inputs:
-    filename: 'nckr.PowerPlatform.IsvHub.Solution\spkl\pack.bat'
+    filename: 'nckr.PowerPlatform.IsvHub.Solution\spkl\pack1.bat'
     workingFolder: 'nckr.PowerPlatform.IsvHub.Solution\spkl'
 
 - task: CopyFiles@2
